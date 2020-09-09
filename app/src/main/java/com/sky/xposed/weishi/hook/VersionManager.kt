@@ -325,5 +325,27 @@ class VersionManager(hookManager: HookManager) {
         var idLikeContainer = "feed_like_status_container"
 
         var idLikeStatus2 = "feed_like_status2"
+
+
+        //============================================================
+        /**
+         *
+         * com.tencent.oscar.module.f.a.c 评论相关的类
+         *
+         * PostCommentReply
+         * 发送请求 a(String paramString1, String paramString2, stMetaPerson paramstMetaPerson, final String paramString3, stMetaReply paramstMetaReply, String paramString4, String paramString5, String paramString6)
+         * 数据类 com.tencent.oscar.utils.c.a.a.b
+         * 结果类 com.tencent.oscar.module.main.message.CommentMsgDetailActivity
+         * 结果方法 public void onEventMainThread(com.tencent.oscar.utils.c.a.a.b paramb)
+         *
+         *
+         *
+         *
+         * com.tencent.oscar.module.b.a.b   public void onEventMainThread(com.tencent.oscar.utils.c.a.a.a parama) 获取评论列表数据。
+         *
+         *
+         *
+         *
+         */
     }
 }

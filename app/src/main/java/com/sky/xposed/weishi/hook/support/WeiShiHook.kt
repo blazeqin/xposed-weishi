@@ -17,6 +17,7 @@
 package com.sky.xposed.weishi.hook.support
 
 import android.app.Activity
+import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +62,22 @@ open class WeiShiHook : BaseHook() {
 
         // 更新
         disableUpdateHook()
+
+
+
+
+
+
+
+        XposedPlus.findAndBeforeHookMethod(
+                mVersionConfig.classSendComment,
+                "a",
+                String::class.java, String::class.java,String::class.java
+        ) {
+
+            XposedBridge.log("=================================================")
+           XposedBridge.log("1 ${it.args[0]} 2 ${it.args[1]} 3 ${it.args[2]} ")
+        }
     }
 
     /**
@@ -268,14 +285,15 @@ open class WeiShiHook : BaseHook() {
 
     open fun testHook() {
 
-//        XposedPlus.findAndBeforeHookMethod(
-//                "android.support.v4.app.Fragment",
-//                "onCreate",
-//                Bundle::class.java
-//        ) {
-//
-//            Alog.d(">>>>>>>>>>>>>>>>>>>> onCreate " + it.thisObject.javaClass)
-//        }
+        XposedPlus.findAndBeforeHookMethod(
+                "android.support.v4.app.Fragment",
+                "onCreate",
+                Bundle::class.java
+        ) {
+
+            XposedBridge.log(">>>>>>>>>>>>>>>> hook weishi fragment")
+            Alog.d(">>>>>>>>>>>>>>>>>>>> onCreate " + it.thisObject.javaClass)
+        }
 //
 //        XposedPlus.findAndBeforeHookMethod(
 //                "com.tencent.oscar.widget.comment.CommentPostBoxFragment",

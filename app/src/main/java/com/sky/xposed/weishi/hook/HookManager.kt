@@ -53,6 +53,7 @@ class HookManager private constructor() {
         fun getInstance()= HOOK_MANAGER
     }
 
+    //onCreate方法之前的操作
     fun initialization(context: Context, param: XC_LoadPackage.LoadPackageParam): HookManager {
 
         Picasso.setSingletonInstance(Picasso.Builder(context).build())
@@ -60,12 +61,15 @@ class HookManager private constructor() {
         mContext = context
         mHandler = AppHandler()
         mLoadPackageParam = param
+        //获取sharedPreference里的所有数据
         mCachePreferences = CachePreferences(context, Constant.Name.WEI_SHI)
+        //将sharedPreference里的数据取出来
         mUserConfigManager = UserConfigManager(this)
+        //配置版本信息
         mVersionManager = VersionManager(this)
         mObjectManager = ObjectManager()
 
-        // 注册监听
+        // 注册监听 动态注册广播，给自己用
         mReceiverHelper = ReceiverHelper(context,
                 ReceiverHelper.ReceiverCallback {
                     action, intent ->  onReceive(action, intent)
@@ -76,9 +80,9 @@ class HookManager private constructor() {
         Alog.setDebug(BuildConfig.DEBUG)
         ToastUtil.getInstance().init(context)
 
-        // 添加统计
-        CrashReport.initCrashReport(context, Constant.Bugly.APP_ID, BuildConfig.DEBUG)
-        CrashReport.setAppChannel(context, BuildConfig.FLAVOR)
+        // 添加统计 添加会有问题，导致插件注入失败
+//        CrashReport.initCrashReport(context, Constant.Bugly.APP_ID, BuildConfig.DEBUG)
+//        CrashReport.setAppChannel(context, BuildConfig.FLAVOR)
 
         return this
     }

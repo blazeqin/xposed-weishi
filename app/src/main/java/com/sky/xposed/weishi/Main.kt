@@ -39,6 +39,7 @@ class Main : IXposedHookLoadPackage {
         // 初始化
         XposedPlus.initDefaultLoadPackage(lparam)
 
+        //在调用application的onCreate方法之前做的操作
         XposedPlus.findAndBeforeHookMethod(
                 "com.tencent.oscar.app.LifePlayApplication",
                 "onCreate") {

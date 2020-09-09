@@ -89,6 +89,7 @@ class AutoCommentHandler(hookManager: HookManager) : CommonHandler(hookManager),
 
         if (!isComment()) return
 
+        //在application创建的时候，创建了handler。保证在主线程执行相关逻辑
         mHandler.postDelayed(this, RandomUtil.random(1500, 3000).toLong())
     }
 
