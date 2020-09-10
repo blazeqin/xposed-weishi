@@ -69,14 +69,37 @@ open class WeiShiHook : BaseHook() {
 
 
 
+        //公共评论
         XposedPlus.findAndBeforeHookMethod(
                 mVersionConfig.classSendComment,
                 "a",
                 String::class.java, String::class.java,String::class.java
         ) {
-
+            while (true) {
+                //flag + list 同时加上等待时间，比如10s， count=5， 每次2s;
+                // 任务结束发送数据，重置list，flag， count
+                //拉取任务，没有任务则等待。
+                //执行任务，调用对应的方法
+            }
             XposedBridge.log("=================================================")
            XposedBridge.log("1 ${it.args[0]} 2 ${it.args[1]} 3 ${it.args[2]} ")
+        }
+
+        //eventBus  d.a.a.c d(object)
+        XposedPlus.findAndBeforeHookMethod(
+                mVersionConfig.eventBus,
+                "d",
+                Object::class.java
+        ) {
+
+            XposedBridge.log("=================================================")
+            XposedBridge.log("1 ${it.args[0]} ")
+            //初始化flag（每个任务对应不同的flag？），先获取数据类
+            //判断数据类型，然后解析该类型
+            //保存数据到list，重置flag和count
+
+            //不需要后续的操作
+            return@findAndBeforeHookMethod
         }
     }
 

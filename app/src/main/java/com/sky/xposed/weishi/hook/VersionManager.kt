@@ -347,5 +347,7 @@ class VersionManager(hookManager: HookManager) {
          *
          *
          */
+
+        var eventBus = "d.a.a.c"
     }
 }
